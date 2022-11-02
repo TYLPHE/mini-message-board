@@ -1,5 +1,13 @@
 extends layout
 
 block content
+  a(href="/new") Post a message 
+
   h1= title
   p Welcome to #{title}
+  ul
+    each msg in messages
+      li= `${msg.user} - ${msg.added}`
+      ul
+        li= msg.text
+        br
