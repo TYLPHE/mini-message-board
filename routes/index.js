@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const dtn = require("date-fns/formatDistanceToNow");
 
 const messages = [
   {
@@ -16,7 +17,7 @@ const messages = [
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: "Mini Messageboard", messages: messages });
+  res.render('index', { title: "Mini Messageboard", messages: messages, format: dtn });
 });
 
 router.get('/new', function(req, res, next) {
@@ -25,7 +26,7 @@ router.get('/new', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
   const messageText = req.body.messageText;
-  const messageUser = req.body.messageUser;
+  const messageUser = req.body.messageUser ? req.body.messageUser : 'Anonymous';
 
   messages.push({text: messageText, user: messageUser, added: new Date()});
   res.redirect('/')

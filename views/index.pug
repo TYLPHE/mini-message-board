@@ -4,10 +4,11 @@ block content
   a(href="/new") Post a message 
 
   h1= title
-  p Welcome to #{title}
-  ul
-    each msg in messages
-      li= `${msg.user} - ${msg.added}`
-      ul
-        li= msg.text
-        br
+  each msg in messages
+    div(class='flex')
+      div(class='time')= format(msg.added, { addSuffix: true })
+      div(class='container')
+        div(class='name')= msg.user
+        p= msg.text
+  br
+  a(href="/new") Post a message 
